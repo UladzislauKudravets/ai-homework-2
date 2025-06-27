@@ -1,0 +1,108 @@
+# FastAPI JSONPlaceholder Clone - Cursor Rules
+
+## Project Overview
+This project is a FastAPI backend application that replicates JSONPlaceholder functionality with extended features including JWT authentication, PostgreSQL database, and Docker containerization.
+
+## Code Standards
+
+### Python Style
+- Follow PEP 8 style guidelines
+- Use type hints for all function parameters and return values
+- Use descriptive variable and function names
+- Maximum line length: 88 characters (Black formatter)
+
+### FastAPI Best Practices
+- Use dependency injection for database sessions and authentication
+- Implement proper HTTP status codes for all responses
+- Use Pydantic models for request/response validation
+- Add comprehensive docstrings to all endpoints
+- Group related endpoints using APIRouter
+- Use proper exception handling with HTTPException
+
+### Database Patterns
+- Use SQLAlchemy ORM with declarative models
+- Implement proper relationships between models
+- Use database migrations with Alembic
+- Separate CRUD operations into dedicated modules
+- Use dependency injection for database sessions
+
+### Security Guidelines
+- Hash passwords using bcrypt
+- Use JWT tokens for authentication
+- Validate all input data using Pydantic
+- Implement proper CORS configuration
+- Use environment variables for sensitive configuration
+
+### Testing Standards
+- Write comprehensive unit and integration tests
+- Use pytest with fixtures for setup/teardown
+- Test all API endpoints with different scenarios
+- Mock external dependencies when necessary
+- Aim for >90% test coverage
+
+### File Organization
+```
+app/
+├── api/
+│   ├── deps.py          # Shared dependencies
+│   └── v1/
+│       ├── api.py       # Main router
+│       ├── auth.py      # Authentication endpoints
+│       └── users.py     # User CRUD endpoints
+├── core/
+│   ├── config.py        # Application configuration
+│   └── security.py     # Security utilities
+├── crud/
+│   └── user.py          # Database operations
+├── models/
+│   └── user.py          # SQLAlchemy models
+├── schemas/
+│   └── user.py          # Pydantic schemas
+├── database.py          # Database configuration
+└── main.py              # FastAPI application
+```
+
+### Error Handling
+- Use structured error responses
+- Log errors appropriately
+- Return meaningful error messages
+- Handle database connection errors gracefully
+
+### Documentation
+- Document all API endpoints with OpenAPI
+- Include examples in endpoint documentation
+- Maintain up-to-date README with setup instructions
+- Document environment variables and configuration
+
+## Development Workflow
+
+### Before Committing
+1. Run linting: `black . && isort . && flake8`
+2. Run tests: `pytest`
+3. Check type hints: `mypy app/`
+4. Update documentation if needed
+
+### Database Changes
+1. Create migration: `alembic revision --autogenerate -m "description"`
+2. Apply migration: `alembic upgrade head`
+3. Test migration rollback: `alembic downgrade -1 && alembic upgrade head`
+
+### Adding New Features
+1. Write tests first (TDD approach)
+2. Implement the feature
+3. Update documentation
+4. Add proper logging
+5. Test with different scenarios
+
+## Dependencies Management
+- Keep requirements.txt updated
+- Pin specific versions for production dependencies
+- Use virtual environments for development
+- Regular security updates for dependencies
+
+## Docker Best Practices
+- Use multi-stage builds when possible
+- Minimize image size
+- Use specific base image versions
+- Set proper health checks
+- Use secrets for sensitive data 
